@@ -1,4 +1,4 @@
-import{a as y,b as S,g as f,h}from"./chunk-F4EFIAMF.js";import{Q as w,T as l,Y as m}from"./chunk-6LTEHY6Y.js";import"./chunk-HXJATXBX.js";import"./chunk-TFKXNE26.js";import{b as a}from"./chunk-SQE76S5B.js";var u=a(y(),1),p=a(S(),1);var _=`/* Layout: a drafting table. Cool grey workspace, white paper, ink text, one teal accent for selection and action. */
+import{a as y,b as S,g as f,h}from"./chunk-TT4ZWJM7.js";import{Z as w,aa as l,fa as m}from"./chunk-CP7X4AB3.js";import"./chunk-TG43VMC5.js";import"./chunk-TFKXNE26.js";import{b as a}from"./chunk-SQE76S5B.js";var u=a(y(),1),p=a(S(),1);var _=`/* Layout: a drafting table. Cool grey workspace, white paper, ink text, one teal accent for selection and action. */
 /* Interface type: IBM Plex Sans + Plex Mono (+ Plex Sans Devanagari for the Hindi UI). Same rules as src/viewer/uiFonts.js. */
 
 
@@ -212,6 +212,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .trow .ty { font-family: var(--mono); font-size: var(--fs-2xs); color: var(--faint); }
 .trow .act { opacity: 0; }
 .trow:hover .act { opacity: 1; }
+.outline-row.sel { background: var(--accent-soft); }
+.outline-row .linklike.nm, .outline-band { text-decoration: none; color: var(--ink); text-align: start; }
+.outline-row.sel .linklike.nm, .outline-band.sel { color: var(--accent); }
+.outline-row.sel .act, .outline-row:focus-within .act { opacity: 1; }
 .field-chip { cursor: grab; }
 .field-chip .nm::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 2px; background: var(--accent); margin-right: 7px; vertical-align: 1px; }
 .subtle { color: var(--faint); font-size: var(--fs-xs); padding: 2px 6px; }
@@ -317,7 +321,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .ruler { overflow: visible; }
 .kbd-grid { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; align-items: center; font-size: var(--fs-base); }
 .ver-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--line-2); }
-.style-card { display: grid; grid-template-columns: 1fr 52px 72px auto; gap: 4px; align-items: center; }
+.style-card { display: grid; grid-template-columns: 1fr 52px 72px auto minmax(70px, 96px); gap: 4px; align-items: center; }
 
 /* digits that line up */
 .vbar .pageno, .vbar .stat, .trow .ty, .input.mono, .rcard .meta, .guide-badge { font-variant-numeric: tabular-nums; }
@@ -431,6 +435,25 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
 /* the designer page is drawn at fixed coordinates: never mirrored */
 .cscroll { direction: ltr; }
+
+/* Phase 8: masters, parts, layers, cell mode, pivot wizard */
+.band.master-host { position: relative; }
+.master-layer { position: absolute; inset: 0; pointer-events: none; opacity: .5; filter: grayscale(.4); }
+.band.master-content { outline: 1.5px dashed var(--accent); outline-offset: -1px; background-color: rgba(14,116,144,.03); }
+.band.master-locked { pointer-events: none; }
+.layer-locked { pointer-events: none; opacity: .6; }
+.it .box.reuse-box { outline: 1.5px dashed rgba(109,40,217,.55); background: rgba(109,40,217,.05); align-items: center; justify-content: center; }
+.it .box.reuse-part { outline: 1.5px solid rgba(109,40,217,.45); }
+.layer-row { display: grid; grid-template-columns: minmax(70px, 1fr) auto auto minmax(80px, 110px) auto; gap: 4px; align-items: center; margin-bottom: 4px; }
+.part-chip { cursor: grab; }
+.pv-zones { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.pv-zone { min-height: 110px; border: 1.5px dashed var(--line); border-radius: var(--r); padding: 8px; display: flex; flex-direction: column; gap: 6px; background: var(--panel-2); }
+.pv-chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 4px 2px 8px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); font-size: var(--fs-sm); }
+.pv-value { display: grid; grid-template-columns: 1fr auto; border-radius: var(--r); padding: 6px; }
+.pv-preview { aspect-ratio: auto; min-height: 220px; place-items: start; }
+.pv-preview > span:not(.hint):not(.err) { width: auto !important; height: auto !important; }
+.pv-preview svg { width: auto !important; height: auto !important; max-width: 100%; }
+@media (max-width: 900px) { .pv-zones { grid-template-columns: 1fr; } }
 
 .pw-embed{display:block;font:var(--fw-regular) var(--fs-base)/var(--lh) var(--ui);color:var(--ink);background:var(--desk);border:1px solid var(--line);border-radius:8px;overflow:hidden}
 `;function v(n){if(!n||window.__pwSnapshot)return;window.__pwSnapshot=!0;let e=window.fetch.bind(window);window.fetch=async(o,i)=>{let s=typeof o=="string"?o:o?.url;try{let r=await e(o,i);if(r.ok||!(s in n))return r}catch(r){if(!(s in n))throw r}return new Response(JSON.stringify(n[s]),{status:200,headers:{"content-type":"application/json","x-pagewright-snapshot":"1"}})}}function C(n,e={}){let o=typeof n=="string"?document.querySelector(n):n;if(!o)throw new Error(`mountViewer: no element for ${n}`);let i=String(e.server||"").replace(/\/$/,"");w(i),e.reports&&m(e.reports),e.fonts&&l(e.fonts,e.customFonts),e.snapshot&&v(e.snapshot);let s=e.uiFontCss??h(i);if(!document.getElementById("pw-embed-fonts")){let t=document.createElement("style");t.id="pw-embed-fonts",t.textContent=s,document.head.appendChild(t)}let r=o.shadowRoot||o.attachShadow({mode:"open"});r.innerHTML=`<style>${_}</style><div class="pw-embed" style="height:${e.height||"720px"}"></div>`;let d=(0,p.createRoot)(r.querySelector(".pw-embed")),c=t=>d.render((0,u.createElement)(f,{definition:t,reportId:e.report,params:e.params,lang:e.lang,onDrill:e.onDrill,title:e.title,toolbar:e.toolbar,viewMode:e.viewMode}));return e.definition?c(e.definition):fetch(`${i}/api/reports/${encodeURIComponent(e.report)}`).then(t=>t.ok?t.json():t.json().then(g=>Promise.reject(new Error(g.error||`HTTP ${t.status}`)))).then(c).catch(t=>{r.querySelector(".pw-embed").innerHTML=`<div class="vmsg error">The report did not load: ${String(t.message).replace(/</g,"&lt;")}</div>`}),{unmount:()=>d.unmount()}}typeof window<"u"&&(window.Pagewright={mountViewer:C});export{C as mountViewer};
