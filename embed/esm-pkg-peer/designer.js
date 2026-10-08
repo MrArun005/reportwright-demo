@@ -10,7 +10,7 @@ import {
   setShadowStyles,
   t,
   uiFontCss
-} from "./chunk-2CD5COHN.js";
+} from "./chunk-7IP67PA6.js";
 import {
   customFonts,
   fontsBase,
@@ -21,7 +21,7 @@ import {
   setAssetBase,
   setFetchPolicy,
   setStandalone
-} from "./chunk-MKY3SDXU.js";
+} from "./chunk-RKFP7SDY.js";
 import {
   BASE_STYLE,
   DEFAULT_THEME,
@@ -66,7 +66,7 @@ import {
   validate,
   withPartProps,
   xmlRowPaths
-} from "./chunk-EK5CJY22.js";
+} from "./chunk-WVQQCD4M.js";
 import {
   PAGE_SIZES,
   fromPt,
@@ -74,23 +74,23 @@ import {
   resolvePage,
   toPt
 } from "./chunk-BR5K6SBL.js";
-import "./chunk-72S6DETS.js";
-import {
-  currencyOf
-} from "./chunk-GJS242RR.js";
 import "./chunk-F6RMRXIN.js";
 import {
   fontFaceCss,
   fontFamilyCss,
   pageToSvg
-} from "./chunk-UJL7C2AS.js";
+} from "./chunk-MXR6JBMP.js";
+import "./chunk-72S6DETS.js";
 import {
   BUNDLED_FAMILIES,
   FONT_FAMILIES,
   allFontKeys,
   fallbackKeys,
   resolveFontKey
-} from "./chunk-QFLVVM3H.js";
+} from "./chunk-JQTRDHQP.js";
+import {
+  currencyOf
+} from "./chunk-GJS242RR.js";
 
 // src/embed/designer.js
 import { createElement as createElement2 } from "react";
@@ -8278,8 +8278,7 @@ function duplicateSelection() {
       const f = findItem(d, id);
       if (!f) continue;
       const copy = cloneWithIds(f.item, used);
-      copy.x += PASTE_OFFSET;
-      copy.y += PASTE_OFFSET;
+      offsetCopy(f.list, copy);
       growToFit(d, { ...f, item: copy });
       f.list.push(copy);
       newIds.push(copy.id);
@@ -8288,6 +8287,14 @@ function duplicateSelection() {
   if (newIds.length) S().select({ kind: "items", ids: newIds });
 }
 var PASTE_OFFSET = 12;
+function offsetCopy(list2, c) {
+  for (const k of ["x", "y"]) if (!Number.isFinite(c[k])) c[k] = 0;
+  for (let n = 0; n <= list2.length; n++) {
+    c.x += PASTE_OFFSET;
+    c.y += PASTE_OFFSET;
+    if (!list2.some((i2) => i2 !== c && i2.x === c.x && i2.y === c.y)) return;
+  }
+}
 var CLIP = "pagewright/items@1";
 async function copySelection() {
   const { sel, def } = S();
@@ -8319,9 +8326,8 @@ function pasteItems(section = "body", text = null) {
     const used = allNames(d);
     for (const it of data.items) {
       const c = cloneWithIds(it, used);
-      c.x += PASTE_OFFSET;
-      c.y += PASTE_OFFSET;
       if (c.type === "table" && !isBodyKey(section)) continue;
+      offsetCopy(secOf(d, section).items, c);
       secOf(d, section).items.push(c);
       growToFit(d, { section, parent: null, item: c });
       ids.push(c.id);
@@ -33113,8 +33119,8 @@ function Outline() {
   const stop = keys.includes(cur2) ? cur2 : keys.find((k) => chosen.has(k) || sel.kind === "section" && k === `band:${sel.section}`) || keys[0];
   const roving = (k) => ({ tabIndex: k === stop ? 0 : -1, onFocus: () => setCur(k) });
   const nav2 = (e) => {
-    if (e.defaultPrevented || e.altKey || e.metaKey || e.ctrlKey || e.target.getAttribute("role") !== "option") return;
-    const all = [...e.currentTarget.querySelectorAll("[role=option]")];
+    if (e.defaultPrevented || e.altKey || e.metaKey || e.ctrlKey || !e.target.hasAttribute("data-opt")) return;
+    const all = [...e.currentTarget.querySelectorAll("[data-opt]")];
     const i2 = all.indexOf(e.target);
     const j = e.key === "ArrowDown" ? i2 + 1 : e.key === "ArrowUp" ? i2 - 1 : e.key === "Home" ? 0 : e.key === "End" ? all.length - 1 : null;
     if (j == null) return;
@@ -33235,7 +33241,7 @@ function Outline() {
     return /* @__PURE__ */ jsxs11("li", { role: "none", children: [
       /* @__PURE__ */ jsxs11("div", { className: `trow outline-row${chosen.has(it.id) ? " sel" : ""}${mark}`, style: { paddingInlineStart: depth * 14 }, "data-outline": it.name, "data-outline-id": it.id, ...dragProps(it, i2, parent, section), children: [
         !readOnly2 && /* @__PURE__ */ jsx14("span", { className: "grip", "aria-hidden": "true", children: "⠿" }),
-        /* @__PURE__ */ jsx14("button", { type: "button", role: "option", className: "linklike nm", onClick: (e) => pick(e, it.id), onKeyDown: (e) => onKey(e, it, list2, i2, parent), "aria-selected": chosen.has(it.id), "aria-describedby": readOnly2 ? "outline-nav" : "outline-nav outline-keys", ...roving(it.id), children: it.name }),
+        /* @__PURE__ */ jsx14("button", { type: "button", "data-opt": "", className: "linklike nm", onClick: (e) => pick(e, it.id), onKeyDown: (e) => onKey(e, it, list2, i2, parent), "aria-pressed": chosen.has(it.id), "aria-describedby": readOnly2 ? "outline-nav" : "outline-nav outline-keys", ...roving(it.id), children: it.name }),
         /* @__PURE__ */ jsx14("span", { className: "ty", children: T(`item_${it.type}`) === `item_${it.type}` ? ITEMS[it.type]?.label || it.type : T(`item_${it.type}`) }),
         !readOnly2 && /* @__PURE__ */ jsxs11("span", { className: "act", style: { display: "inline-flex", gap: 2 }, children: [
           /* @__PURE__ */ jsx14("button", { type: "button", className: "btn sm ghost icon", tabIndex: -1, disabled: i2 === 0, onClick: () => reorderItem(it.id, -1), title: T("outlineBackward"), "aria-label": `${T("outlineBackward")}: ${it.name}`, children: "↑" }),
@@ -33249,10 +33255,10 @@ function Outline() {
   return /* @__PURE__ */ jsxs11("div", { className: "pane", "data-testid": "outline", children: [
     /* @__PURE__ */ jsx14("h4", { children: T("outline") }),
     /* @__PURE__ */ jsxs11("div", { className: "pane-body", ref: body, children: [
-      /* @__PURE__ */ jsx14("div", { role: "listbox", "aria-label": T("outline"), "aria-multiselectable": "true", onKeyDown: nav2, children: sectionList(def).map(({ key: key2, label }) => {
+      /* @__PURE__ */ jsx14("div", { role: "group", "aria-label": T("outline"), onKeyDown: nav2, children: sectionList(def).map(({ key: key2, label }) => {
         const items = secOf(def, key2)?.items || [];
         return /* @__PURE__ */ jsxs11("div", { role: "group", "aria-label": label, className: `outline-sec${drop?.band === key2 ? " drop-band" : ""}`, "data-outline-band": key2, ...bandDrop(key2), children: [
-          /* @__PURE__ */ jsx14("button", { type: "button", role: "option", "aria-selected": sel.kind === "section" && sel.section === key2, "aria-describedby": "outline-nav", className: `linklike outline-band${sel.kind === "section" && sel.section === key2 ? " sel" : ""}`, onClick: () => useDesigner.getState().select({ kind: "section", section: key2 }), ...roving(`band:${key2}`), children: /* @__PURE__ */ jsx14(
+          /* @__PURE__ */ jsx14("button", { type: "button", "data-opt": "", "aria-pressed": sel.kind === "section" && sel.section === key2, "aria-describedby": "outline-nav", className: `linklike outline-band${sel.kind === "section" && sel.section === key2 ? " sel" : ""}`, onClick: () => useDesigner.getState().select({ kind: "section", section: key2 }), ...roving(`band:${key2}`), children: /* @__PURE__ */ jsx14(
           "b", { children: label }) }),
           /* @__PURE__ */ jsx14("ul", { className: "tree", role: "none", children: items.length ? rows(items, null, 1, key2) : /* @__PURE__ */ jsx14("li", { className: "subtle", role: "none", children: T("outlineEmpty") }) })
         ] }, key2);
@@ -34355,7 +34361,7 @@ function LeftRail({ T, readOnly: readOnly2, embed }) {
     const el = body.current?.querySelector(`[data-rail="${id}"]`);
     if (el) {
       body.current.scrollTo({ top: el.offsetTop - body.current.offsetTop, behavior: "smooth" });
-      (el.querySelector('[role=listbox] [tabindex="0"]') || el.querySelector("button, input, select, textarea"))?.focus({ preventScroll: true });
+      (el.querySelector('[data-opt][tabindex="0"]') || el.querySelector("button, input, select, textarea"))?.focus({ preventScroll: true });
     }
     setAt(id);
   };
@@ -35428,6 +35434,7 @@ a.cell-name:hover { color: var(--accent); }
 .outline-row.sel { background: var(--accent-soft); }
 .outline-row .linklike.nm, .outline-band { text-decoration: none; color: var(--ink); text-align: start; }
 .outline-row.sel .linklike.nm, .outline-band.sel { color: var(--accent); }
+.outline-row.sel .ty { color: var(--muted); } /* --faint is 4.38:1 on --accent-soft; --muted passes in both themes */
 .outline-row.sel .act, .outline-row:focus-within .act { opacity: 1; }
 .outline-row[draggable="true"] { cursor: grab; }
 .outline-row .grip { color: var(--faint); font-size: 10px; line-height: 1; margin-inline-start: -2px; opacity: .55; }

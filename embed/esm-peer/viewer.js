@@ -4,7 +4,7 @@ import {
   loadLanguage,
   setShadowStyles,
   uiFontCss
-} from "./chunk-TMKJDW62.js";
+} from "./chunk-5DDQE27E.js";
 import {
   registerReports,
   setAssetBase,
@@ -12,12 +12,12 @@ import {
   setFetchPolicy,
   setStandalone,
   usingWorker
-} from "./chunk-3DOCCIRH.js";
+} from "./chunk-U6HJRDBS.js";
 import "./chunk-F6RMRXIN.js";
-import "./chunk-VXXHZVVK.js";
+import "./chunk-PCBNXUTH.js";
 import "./chunk-BR5K6SBL.js";
 import "./chunk-72S6DETS.js";
-import "./chunk-S5Y2GHBR.js";
+import "./chunk-VHNQ7PTP.js";
 import "./chunk-OLLMACWA.js";
 
 // src/embed/index.js
@@ -399,6 +399,7 @@ a.cell-name:hover { color: var(--accent); }
 .outline-row.sel { background: var(--accent-soft); }
 .outline-row .linklike.nm, .outline-band { text-decoration: none; color: var(--ink); text-align: start; }
 .outline-row.sel .linklike.nm, .outline-band.sel { color: var(--accent); }
+.outline-row.sel .ty { color: var(--muted); } /* --faint is 4.38:1 on --accent-soft; --muted passes in both themes */
 .outline-row.sel .act, .outline-row:focus-within .act { opacity: 1; }
 .outline-row[draggable="true"] { cursor: grab; }
 .outline-row .grip { color: var(--faint); font-size: 10px; line-height: 1; margin-inline-start: -2px; opacity: .55; }

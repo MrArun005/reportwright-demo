@@ -6,7 +6,7 @@ import {
   require_react,
   setShadowStyles,
   uiFontCss
-} from "./chunk-L6YEIVVD.js";
+} from "./chunk-B5ZCT3UK.js";
 import {
   registerReports,
   setAssetBase,
@@ -14,12 +14,12 @@ import {
   setFetchPolicy,
   setStandalone,
   usingWorker
-} from "./chunk-CNDUJ7IV.js";
+} from "./chunk-ES2LYZ6S.js";
 import "./chunk-BR5K6SBL.js";
-import "./chunk-72S6DETS.js";
 import "./chunk-F6RMRXIN.js";
-import "./chunk-UJL7C2AS.js";
-import "./chunk-QFLVVM3H.js";
+import "./chunk-U2ZY2NPQ.js";
+import "./chunk-72S6DETS.js";
+import "./chunk-MS2LQC2O.js";
 import {
   __toESM
 } from "./chunk-OLLMACWA.js";
@@ -403,6 +403,7 @@ a.cell-name:hover { color: var(--accent); }
 .outline-row.sel { background: var(--accent-soft); }
 .outline-row .linklike.nm, .outline-band { text-decoration: none; color: var(--ink); text-align: start; }
 .outline-row.sel .linklike.nm, .outline-band.sel { color: var(--accent); }
+.outline-row.sel .ty { color: var(--muted); } /* --faint is 4.38:1 on --accent-soft; --muted passes in both themes */
 .outline-row.sel .act, .outline-row:focus-within .act { opacity: 1; }
 .outline-row[draggable="true"] { cursor: grab; }
 .outline-row .grip { color: var(--faint); font-size: 10px; line-height: 1; margin-inline-start: -2px; opacity: .55; }
